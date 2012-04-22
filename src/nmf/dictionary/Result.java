@@ -12,12 +12,15 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 
+
 @WebServlet("/Result")
 public class Result extends HttpServlet {	
 	String 				firstName, lastName, departament, innerPhone, mobPhone;
+	String[]			seekColumns;
 	SearchEngine		searchEngine;
 	PrintWriter			out;	
 	ResultSet			result;	
+	HashMap     		accordanceMap;
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding(DictionaryConstants.encoding);
 		res.setCharacterEncoding(DictionaryConstants.encoding);
@@ -27,8 +30,9 @@ public class Result extends HttpServlet {
 		lastName		=	req.getParameter(DictionaryConstants.lastNamePar);
 		departament		=	req.getParameter(DictionaryConstants.departamentPar);
 		innerPhone		=	req.getParameter(DictionaryConstants.innerNumberPar);
-		mobPhone		=	req.getParameter(DictionaryConstants.mobNumberPar);			
-		searchEngine	=	new SearchEngine(this.getCriterionMap());
+		mobPhone		=	req.getParameter(DictionaryConstants.mobNumberPar);	
+		seekColumns		=	req.getParameterValues(DictionaryConstants.option);
+		searchEngine	=	new SearchEngine(this.getCriterionMap(), seekColumns);
 		try 
 		{
 			result	=	searchEngine.doSearch();
@@ -68,29 +72,22 @@ public class Result extends HttpServlet {
 	}
 	private void outPut()	throws SQLException
 	{
+		this.makeAccordanceMap();
 		out.println("<TABLE border=1>");
-		out.println(String.format(DictionaryConstants.headTableRow, 
-									DictionaryConstants.emplId,
-									DictionaryConstants.lastName,
-									DictionaryConstants.firstName,
-									DictionaryConstants.middleName,
-									DictionaryConstants.departament,
-									DictionaryConstants.position,
-									DictionaryConstants.innerNumber,
-									DictionaryConstants.mobNumber));
+		out.print("<tr>");
+		for(int i=0;i<seekColumns.length;i++)
+		{
+			out.print(String.format(DictionaryConstants.headTableRowCell, accordanceMap.get(seekColumns[i])));
+		}
+		out.println("</tr>");		
 		while(result.next())
 		{			
-			out.println(String.format(DictionaryConstants.resTableRow,
-										result.getString(DictionaryConstants.emplIdCol),
-										result.getString(DictionaryConstants.lastNameCol),
-										result.getString(DictionaryConstants.firstNameCol),
-										result.getString(DictionaryConstants.middleNameCol),
-										result.getString(DictionaryConstants.organizCol),
-										result.getString(DictionaryConstants.positionCol),
-										result.getString(DictionaryConstants.innerPhoneCol),
-										result.getString(DictionaryConstants.mobPhoneCol)										
-										));			
-		}	
+			out.print("<tr>");
+			for(int i=0;i<seekColumns.length;i++){
+				out.print(String.format(DictionaryConstants.resTableRowCell, result.getString(seekColumns[i])));
+			}			
+			out.println("</tr>");
+		}
 		out.println("</TABLE>");
 	}
 	
@@ -99,6 +96,19 @@ public class Result extends HttpServlet {
 		 out.println("<br><FORM method='get' action='index'>");
 		 out.println("<input type='submit' value='Вернуться к поиску'>");	    
 	     out.println("</FORM>");
+	}
+	
+	private void  makeAccordanceMap()
+	{
+		accordanceMap	=	new HashMap<String, String>();
+		accordanceMap.put(DictionaryConstants.emplIdCol, 		DictionaryConstants.emplId);
+		accordanceMap.put(DictionaryConstants.firstNameCol, 	DictionaryConstants.firstName);
+		accordanceMap.put(DictionaryConstants.lastNameCol, 		DictionaryConstants.lastName);
+		accordanceMap.put(DictionaryConstants.middleNameCol, 	DictionaryConstants.middleName);
+		accordanceMap.put(DictionaryConstants.organizCol, 		DictionaryConstants.departament);
+		accordanceMap.put(DictionaryConstants.positionCol, 		DictionaryConstants.position);
+		accordanceMap.put(DictionaryConstants.innerPhoneCol, 	DictionaryConstants.innerNumber);
+		accordanceMap.put(DictionaryConstants.mobPhoneCol, 		DictionaryConstants.mobNumber);
 	}
 
 }

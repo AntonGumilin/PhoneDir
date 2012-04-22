@@ -12,16 +12,18 @@ import java.util.Iterator;
 
 class SearchEngine {
 	Map<String, String>				criterionMap;
+	String[]						seekColumns;
 	Connection 						conn;
 	Statement						statement;
 	ResultSet						result;
 	Set								s;
 	Iterator						i;
 	
-	public SearchEngine(Map	_critMap)
+	public SearchEngine(Map	_critMap, String[] _seekColumns)
 	{
 		criterionMap	=	new HashMap<String, String>();
 		criterionMap.putAll(_critMap);
+		seekColumns		=	_seekColumns;
 		
 	}
 	public ResultSet doSearch() throws SQLException
@@ -52,7 +54,16 @@ class SearchEngine {
 	
 	private String makeSelectPart()
 	{
-		String query	=	"Select * from Dictionary";
+		String query	=	"Select ";
+		for(int i=0;i<seekColumns.length;i++)
+		{
+			query += seekColumns[i];
+			if(i != seekColumns.length-1)
+			{
+				query += ',';
+			}
+		}
+		query += " from Dictionary";
 		return query;
 	}
 	

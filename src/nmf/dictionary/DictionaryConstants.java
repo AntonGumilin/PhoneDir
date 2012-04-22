@@ -3,6 +3,7 @@ package nmf.dictionary;
 public class DictionaryConstants 
 {
 	public static final  String   tableRow					=	"<tr><td>%s:</td><td><input type='text' name='%s'></td></tr>";
+	public static final  String	  selectRow					=	"<tr><td>%s</td><td><input type='checkbox' name='option' value='%s'checked></td></tr>";
 	public static final  String   firstName					=	"Имя";
 	public static final  String   firstNamePar		 		=   "firstName";
 	public static final  String   lastName					=	"Фамилия";
@@ -18,6 +19,8 @@ public class DictionaryConstants
 	public static final  String   password					=	"integral";
 	public static final  String   encoding					=	"UTF-8";
 	public static final  String   contentType				=	"text/html";
+	public static final  String   headTableRowCell			=	"<th>%s</th>";
+	public static final  String   resTableRowCell			=	"<td>%s</td>";
 	public static final	 String	  headTableRow				=	"<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>";
 	public static final	 String	  resTableRow			 	=	"<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>";
 	// table headers
@@ -34,5 +37,9 @@ public class DictionaryConstants
 	public static final	 String	  innerPhoneCol				=	"INNERPHONE";
 	public static final	 String	  mobPhoneCol				=	"MOBPHONE";
 	public static final  String	  empty						=	"";
+	public static final  String   option					=	"option";
+	
+	public static final  String   PhoneDirTitle				=	"Телефонный справочник компании Nemiroff";
+	public static final  String   SelectedColumn			=	"Отметьте информацию, которая Вам нужна:";
 	
 }

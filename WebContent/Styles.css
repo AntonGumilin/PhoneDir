@@ -1,0 +1,28 @@
+div.header
+{	
+	color:#000033;	
+	font:24 px,"Verdana";		
+	border-bottom: 1px solid #CACACA;
+	background-color:#ffffff;	
+	padding-left:24px;	
+}
+
+div.searchform
+{		
+	padding-top:15px;
+	padding-left:24px;
+	font: 8 px, "Verdana";
+	width:100%;
+}
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+table.selectTable
+{
+	width:100%;
+}
+

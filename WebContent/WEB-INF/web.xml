@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	<display-name>Dictionary</display-name>
-<!--	<welcome-file-list>
+	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
@@ -13,22 +13,4 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
--->
-	<servlet>
-		 <servlet-name>
-            hi
-        </servlet-name>
-        <servlet-class>
-            index
-        </servlet-class>		
-	</servlet>
-	<servlet-mapping>
-        <servlet-name>
-            hi
-        </servlet-name>
-        <url-pattern>
-            /index.html
-        </url-pattern>
-    </servlet-mapping>
-	
 </web-app>
