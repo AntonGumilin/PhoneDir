@@ -41,5 +41,6 @@ public class DictionaryConstants
 	
 	public static final  String   PhoneDirTitle				=	"Телефонный справочник компании Nemiroff";
 	public static final  String   SelectedColumn			=	"Отметьте информацию, которая Вам нужна:";
+	public static final  String	  enterCriteria				=	"Введите критерии поиска:";
 	
 }
